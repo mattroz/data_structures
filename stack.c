@@ -21,12 +21,13 @@ int print(struct stack **);
 
 int main(int argc, char *argv[])
 {
+/*
 	if (argc != 2)
 	{
 		printf("usage: ./s <value>\n");
 		exit(EXIT_FAILURE);
 	}
-
+*/	
 	struct stack *head = malloc(sizeof *head); 
 	if (init(head) != 1)
 	{
@@ -34,19 +35,20 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	if (push(&head, atoi(argv[1])) != 1)
+	for(int i = 0; i < 10; i++)
 	{
-		printf("push() failure\n");
-		exit(EXIT_FAILURE);
+		if (push(&head, i) != 1)
+		{
+			printf("push() failure at %d element\n", i);
+			exit(EXIT_FAILURE);
+		}
 	}
-
-	printf("%d\n", head->value);
-
-	if (pop(&head) != 1)
+	
+	if(print(&head) != 1)
 	{
-		printf("pop() failure\n");
+		printf("print() failure\n");
 		exit(EXIT_FAILURE);
-	}
+	}	
 
 	return 0;
 }
@@ -79,5 +81,17 @@ int pop(struct stack **_head)
 {
 	printf("pop %d\n", (*_head)->value);
 	*_head = (*_head)->next;
+	return 1;
+}
+
+
+int print(struct stack **_head)
+{
+	while((*_head)->next != NULL)
+	{
+		printf("print %d\n", (*_head)->value);
+		pop(_head);
+	}
+	
 	return 1;
 }
