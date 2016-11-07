@@ -34,8 +34,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-	int val = atoi(argv[1]);        
-    if (push(&head, val) != 1)
+    if (push(&head, atoi(argv[1])) != 1)
     {
         printf("push() failure\n");
         exit(EXIT_FAILURE);
@@ -57,7 +56,7 @@ int init(struct stack *_head)
 
 int push(struct stack *_head, int _value)
 {
-    struct stack *new_node;
+    struct stack *new_node = malloc(sizeof *new_node);
     new_node->value = _value;
     new_node->next = _head;
     _head = new_node;
