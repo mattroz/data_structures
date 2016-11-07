@@ -27,16 +27,24 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	struct stack head; 
-	if (init(&head) != 1)
+	struct stack *head = malloc(sizeof *head); 
+	if (init(head) != 1)
 	{
 		printf("init() failure\n");
 		exit(EXIT_FAILURE);
 	}
 
-	if (push(&head, atoi(argv[1])) != 1)
+	if (push(head, atoi(argv[1])) != 1)
 	{
 		printf("push() failure\n");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%d\n", head->value);
+
+	if (pop(head) != 1)
+	{
+		printf("pop() failure\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -60,15 +68,16 @@ int push(struct stack *_head, int _value)
 	new_node->value = _value;
 	new_node->next = _head;
 	_head = new_node;
-	free(new_node);
 
-	printf("%d pushed\n", _value);
+	printf("%d pushed\n", _head->value);
 
 	return 1;
 }
+
 
 int pop(struct stack *_head)
 {
 	printf("pop %d\n", _head->value);
 	_head = _head->next;
+	return 1;
 }
