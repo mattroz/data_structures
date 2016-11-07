@@ -14,9 +14,9 @@ struct stack
 
 
 int init(struct stack *);
-int push(struct stack *, int);
-int pop(struct stack *);
-int print(struct stack *);
+int push(struct stack **, int);
+int pop(struct stack **);
+int print(struct stack **);
 
 
 int main(int argc, char *argv[])
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	if (push(head, atoi(argv[1])) != 1)
+	if (push(&head, atoi(argv[1])) != 1)
 	{
 		printf("push() failure\n");
 		exit(EXIT_FAILURE);
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
 	printf("%d\n", head->value);
 
-	if (pop(head) != 1)
+	if (pop(&head) != 1)
 	{
 		printf("pop() failure\n");
 		exit(EXIT_FAILURE);
@@ -62,22 +62,22 @@ int init(struct stack *_head)
 }
 
 
-int push(struct stack *_head, int _value)
+int push(struct stack **_head, int _value)
 {
 	struct stack *new_node = malloc(sizeof *new_node);
 	new_node->value = _value;
-	new_node->next = _head;
-	_head = new_node;
+	new_node->next = *_head;
+	*_head = new_node;
 
-	printf("%d pushed\n", _head->value);
+	printf("%d pushed\n", (*_head)->value);
 
 	return 1;
 }
 
 
-int pop(struct stack *_head)
+int pop(struct stack **_head)
 {
-	printf("pop %d\n", _head->value);
-	_head = _head->next;
+	printf("pop %d\n", (*_head)->value);
+	*_head = (*_head)->next;
 	return 1;
 }
