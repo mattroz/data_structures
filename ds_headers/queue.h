@@ -12,7 +12,7 @@ typedef struct Node
 }Node_t;
 
 /*	PROTOTYPES	*/
-int initialize_queue(Node_t*, Node_t*);
+int initialize_queue(Node_t**, Node_t**);
 int enqueue(Node_t**, int);
 int dequeue(Node_t**, int*);
 int is_empty(Node_t *);
@@ -20,10 +20,12 @@ int is_empty(Node_t *);
 /*		IMPLEMENTATION	*/
 
 /*	link head and tail to each other	*/
-int initialize_queue(Node_t *_head, Node_t *_tail)
+int initialize_queue(Node_t **_head, Node_t **_tail)
 {
-	_tail->next = NULL;
-	_head->next = _tail;
+	*_tail = malloc(sizeof(Node_t));
+	*_head = malloc(sizeof(Node_t));
+	(*_tail)->next = NULL;
+	(*_head)->next = *_tail;
 	printf("initialization\n");
 
 	return 1;
@@ -32,7 +34,7 @@ int initialize_queue(Node_t *_head, Node_t *_tail)
 
 int enqueue(Node_t **_tail, int _value)
 {
-	Node_t *new_node = malloc(sizeof Node_t);
+	Node_t *new_node = malloc(sizeof(Node_t));
 	new_node->value = _value;
 	new_node->next = NULL;
 	(*_tail)->next = new_node;
@@ -65,7 +67,7 @@ int dequeue(Node_t **_head, int *dest)
 int is_empty(Node_t *_head)
 {
 	/*  in other words: check if head == tail   */
-	return ((head->next == NULL) ? 1 : 0);
+	return ((_head->next == NULL) ? 1 : 0);
 }
 
 
