@@ -10,10 +10,13 @@ typedef struct Node
 	Node *next;
 }Node;
 
+/*	PROTOTYPES	*/
 int initialize_queue(Node*, Node*);
 int enqueue(Node**, int);
 int dequeue(Node**, int*);
-int empty(Node **);
+int is_empty(Node **);
+
+/*		IMPLEMENTATION	*/
 
 /*	link head and tail to each other	*/
 int initialize_queue(Node *_head, Node *_tail)
@@ -41,6 +44,13 @@ int enqueue(Node **_tail, int _value)
 
 int dequeue(Node **_head, int *dest)
 {
+	/*	check if head == tail	*/
+	if(is_empty((*_head)) != 0)
+	{
+		printf("queue is empty, nothing to dequeue\n");
+		return 1;
+	}
+	
 	Node **temp = &_head;
 	*dest = (*_head)->value;
 	*_head = (*_head)->next;
@@ -49,6 +59,12 @@ int dequeue(Node **_head, int *dest)
 	printf("dequeue %d\n", *dest);
 
 	return 1;
+}
+
+int is_empty(Node *_head)
+{
+	/*  in other words: check if head == tail   */
+	return (((*_head)->next == NULL) : 1 ? 0);
 }
 
 
