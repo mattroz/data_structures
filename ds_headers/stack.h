@@ -2,16 +2,16 @@
 
 /*  define stack struct and functions to work with stack    */
 
-struct stack
+typedef struct Node
 {
 	int value;
-	struct stack *next;
-};
+	struct Node *next;
+} Node_t;
 
 
 /*  stack functions implementation  */
 
-int init(struct stack *_head)
+int init(Node_t *_head)
 {
 	_head->value = 0;
 	_head->next = NULL;
@@ -19,9 +19,9 @@ int init(struct stack *_head)
 }
 
 
-int push(struct stack **_head, int _value)
+int push(Node_t **_head, int _value)
 {
-	struct stack *new_node = malloc(sizeof *new_node);
+	Node_t *new_node = malloc(sizeof(Node_t));
 	new_node->value = _value;
 	new_node->next = *_head;
 	*_head = new_node;
@@ -31,18 +31,21 @@ int push(struct stack **_head, int _value)
 }
 
 
-int pop(struct stack **_head)
+int pop(Node_t **_head, int *dest)
 {
-	printf("pop %d\n", (*_head)->value);
+	*dest = (*_head)->value;
 	*_head = (*_head)->next;
 	return 1;
 }
 
 
-int print(struct stack **_head)
+int print(Node_t **_head)
 {
 	while((*_head)->next != NULL)
-		pop(_head);
-	
+	{	
+		int tempval;
+		pop(_head, &tempval);
+		printf("%d\n", tempval);
+	}
 	return 1;
 }
