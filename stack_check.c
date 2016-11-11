@@ -6,14 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-/*
-	if (argc != 2)
-	{
-		printf("usage: ./s <value>\n");
-		exit(EXIT_FAILURE);
-	}
-*/	
-	struct stack *head = malloc(sizeof *head); 
+	Node_t *head = malloc(sizeof(Node_t)); 
 	if (init(head) != 1)
 	{
 		printf("init() failure\n");
