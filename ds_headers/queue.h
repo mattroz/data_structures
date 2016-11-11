@@ -19,6 +19,13 @@ int empty(Node **);
 int enqueue(Node **_tail, int _value)
 {
 	
+	Node *new_node = malloc(sizeof Node);
+	new_node->value = _value;
+	new_node->next = NULL;
+	(*_tail)->next = new_node;
+	*_tail = new_node;
+
+	return 1;
 }
 
 
