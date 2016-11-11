@@ -24,6 +24,19 @@ int enqueue(Node **_tail, int _value)
 	new_node->next = NULL;
 	(*_tail)->next = new_node;
 	*_tail = new_node;
+	printf("enqueue %d\n", (*_tail)->value);
+
+	return 1;
+}
+
+
+int dequeue(Node **_head, int *dest)
+{
+	Node **temp = *_head;
+	*dest = (*_head)->value;
+	*_head = (*_head)->next;
+	free(*temp);
+	printf("dequeue %d\n", *dest);
 
 	return 1;
 }
