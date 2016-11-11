@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "ds_headers/stack.h"
+#include "sources/headers/stack.h"
 
 
 int main(int argc, char *argv[])
