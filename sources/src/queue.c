@@ -62,6 +62,3 @@ int is_empty(Node_t *_head)
 	return ((_head == NULL) ? 1 : 0);
 }
 
-
-#endif
-
